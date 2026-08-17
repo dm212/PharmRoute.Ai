@@ -9,6 +9,8 @@ import org.neo4j.driver.Driver;
 import org.neo4j.driver.Record;
 import org.neo4j.driver.Session;
 import org.neo4j.driver.exceptions.Neo4jException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.pharmatrace.api.batch.BatchInvestigation.BatchOverview;
@@ -19,6 +21,8 @@ import com.pharmatrace.api.batch.BatchInvestigation.RiskExposure;
 
 @Repository
 public class BatchRepository {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(BatchRepository.class);
 
     private static final String OVERVIEW_QUERY = """
             MATCH (manufacturer:Organization)-[:PRODUCES]->(batch:Batch {id: $batchId})
@@ -115,6 +119,8 @@ public class BatchRepository {
                         overview.get(), journey, risks, inspections));
             });
         } catch (Neo4jException exception) {
+            LOGGER.error("CognoDB investigation query failed: {}: {}",
+                    exception.getClass().getSimpleName(), exception.getMessage());
             throw new GraphUnavailableException(exception);
         }
     }
