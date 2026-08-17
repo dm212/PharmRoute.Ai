@@ -21,6 +21,8 @@ Open the public application. Search for `BT-2026-0812-A17` and highlight:
 - the two related batches discovered through the shared facility;
 - the explicit evidence path from selected batch to facility to incident.
 
+If time permits, briefly search `BT-2026-0814-I31` to contrast the packaging-risk path with a high-severity cold-chain breach and failed inspection.
+
 ## 4. Code and data model — 60 seconds
 
 Show `scripts/seed.cypher`, then the parameterized queries in `BatchRepository.java`. Point out controller/service/repository separation, environment-based credentials, error handling, tests, Dockerfile, Render Blueprint, and GitHub Actions.

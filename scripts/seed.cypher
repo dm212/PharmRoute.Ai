@@ -164,3 +164,95 @@ SET incident.type = 'PACKAGING_TAMPERING', incident.severity = 'MEDIUM',
     incident.summary = 'Packaging anomalies found on a separate batch handled at the facility';
 MATCH (a:Facility {id: 'FAC-MEDIROUTE-07'}), (b:RiskEvent {id: 'INC-104'}) MERGE (a)-[:FLAGGED_FOR]->(b);
 MATCH (a:Batch {id: 'BT-2026-0809-C04'}), (b:RiskEvent {id: 'INC-104'}) MERGE (a)-[:ASSOCIATED_WITH]->(b);
+
+// Presentation scenario 2: temperature-sensitive medicine exposed through a cold-chain breach.
+MERGE (coldHub:Facility {id: 'FAC-NORTHSTAR-COLD-02'})
+SET coldHub.name = 'NorthStar Cold Storage 02', coldHub.type = 'COLD_STORAGE',
+    coldHub.riskLevel = 'HIGH', coldHub.verified = true;
+MATCH (a:Organization {id: 'ORG-NORTHSTAR'}), (b:Facility {id: 'FAC-NORTHSTAR-COLD-02'}) MERGE (a)-[:OPERATES]->(b);
+MATCH (a:Facility {id: 'FAC-NORTHSTAR-COLD-02'}), (b:Location {id: 'LOC-MYS'}) MERGE (a)-[:LOCATED_IN]->(b);
+
+MERGE (insulivex:Drug {id: 'DRUG-INSULIVEX-100'})
+SET insulivex.name = 'Insulivex', insulivex.strength = '100 IU/mL',
+    insulivex.form = 'Injection', insulivex.packSize = '10 mL vial';
+
+MERGE (batchE:Batch {id: 'BT-2026-0814-I31'})
+SET batchE.manufacturedOn = date('2026-08-14'), batchE.expiresOn = date('2027-08-13'),
+    batchE.status = 'QUARANTINED', batchE.quantity = 900, batchE.provenanceConfidence = 62;
+MERGE (batchF:Batch {id: 'BT-2026-0813-I08'})
+SET batchF.manufacturedOn = date('2026-08-13'), batchF.expiresOn = date('2027-08-12'),
+    batchF.status = 'DELIVERED', batchF.quantity = 1250, batchF.provenanceConfidence = 79;
+MATCH (a:Organization {id: 'ORG-ASTERIA'}), (b:Batch {id: 'BT-2026-0814-I31'}) MERGE (a)-[:PRODUCES]->(b);
+MATCH (a:Organization {id: 'ORG-ASTERIA'}), (b:Batch {id: 'BT-2026-0813-I08'}) MERGE (a)-[:PRODUCES]->(b);
+MATCH (a:Batch {id: 'BT-2026-0814-I31'}), (b:Drug {id: 'DRUG-INSULIVEX-100'}) MERGE (a)-[:INSTANCE_OF]->(b);
+MATCH (a:Batch {id: 'BT-2026-0813-I08'}), (b:Drug {id: 'DRUG-INSULIVEX-100'}) MERGE (a)-[:INSTANCE_OF]->(b);
+
+MERGE (e1:Shipment {id: 'SHP-I31-01'})
+SET e1.sequence = 1, e1.departedAt = datetime('2026-08-15T05:30:00+05:30'),
+    e1.arrivedAt = datetime('2026-08-15T12:20:00+05:30'), e1.status = 'DELIVERED';
+MATCH (a:Batch {id: 'BT-2026-0814-I31'}), (b:Shipment {id: 'SHP-I31-01'}) MERGE (a)-[:SHIPPED_VIA]->(b);
+MATCH (a:Shipment {id: 'SHP-I31-01'}), (b:Facility {id: 'FAC-ASTERIA-01'}) MERGE (a)-[:FROM]->(b);
+MATCH (a:Shipment {id: 'SHP-I31-01'}), (b:Facility {id: 'FAC-NORTHSTAR-COLD-02'}) MERGE (a)-[:TO]->(b);
+
+MERGE (f1:Shipment {id: 'SHP-I08-01'})
+SET f1.sequence = 1, f1.departedAt = datetime('2026-08-14T06:10:00+05:30'),
+    f1.arrivedAt = datetime('2026-08-14T13:00:00+05:30'), f1.status = 'DELIVERED';
+MATCH (a:Batch {id: 'BT-2026-0813-I08'}), (b:Shipment {id: 'SHP-I08-01'}) MERGE (a)-[:SHIPPED_VIA]->(b);
+MATCH (a:Shipment {id: 'SHP-I08-01'}), (b:Facility {id: 'FAC-ASTERIA-01'}) MERGE (a)-[:FROM]->(b);
+MATCH (a:Shipment {id: 'SHP-I08-01'}), (b:Facility {id: 'FAC-NORTHSTAR-COLD-02'}) MERGE (a)-[:TO]->(b);
+
+MERGE (coldIncident:RiskEvent {id: 'INC-207'})
+SET coldIncident.type = 'COLD_CHAIN_BREACH', coldIncident.severity = 'HIGH',
+    coldIncident.status = 'INVESTIGATING', coldIncident.reportedOn = date('2026-08-16'),
+    coldIncident.summary = 'Temperature exceeded 8 C for 96 minutes during a refrigeration outage';
+MATCH (a:Facility {id: 'FAC-NORTHSTAR-COLD-02'}), (b:RiskEvent {id: 'INC-207'}) MERGE (a)-[:FLAGGED_FOR]->(b);
+MATCH (a:Batch {id: 'BT-2026-0814-I31'}), (b:RiskEvent {id: 'INC-207'}) MERGE (a)-[:ASSOCIATED_WITH]->(b);
+
+MERGE (coldInspection:Inspection {id: 'INSP-I31-02'})
+SET coldInspection.performedAt = datetime('2026-08-16T10:15:00+05:30'),
+    coldInspection.result = 'FAILED', coldInspection.notes = 'Temperature logger confirms excursion beyond stability threshold';
+MATCH (a:Batch {id: 'BT-2026-0814-I31'}), (b:Inspection {id: 'INSP-I31-02'}) MERGE (a)-[:HAS_INSPECTION]->(b);
+MATCH (a:Inspection {id: 'INSP-I31-02'}), (b:Authority {id: 'AUTH-CDSCO-SOUTH'}) MERGE (a)-[:PERFORMED_BY]->(b);
+MATCH (a:Inspection {id: 'INSP-I31-02'}), (b:Facility {id: 'FAC-NORTHSTAR-COLD-02'}) MERGE (a)-[:AT_FACILITY]->(b);
+
+// Presentation scenario 3: two batches connected through a suspected counterfeit wholesaler.
+MERGE (delta:Organization {id: 'ORG-DELTA-WHOLESALE'})
+SET delta.name = 'Delta LifeScience Wholesale', delta.type = 'WHOLESALER',
+    delta.licenseNumber = 'PENDING-VERIFY', delta.verified = false;
+MERGE (deltaHub:Facility {id: 'FAC-DELTA-MAA-04'})
+SET deltaHub.name = 'Delta Wholesale Depot 04', deltaHub.type = 'WHOLESALE_DEPOT',
+    deltaHub.riskLevel = 'CRITICAL', deltaHub.verified = false;
+MATCH (a:Organization {id: 'ORG-DELTA-WHOLESALE'}), (b:Facility {id: 'FAC-DELTA-MAA-04'}) MERGE (a)-[:OPERATES]->(b);
+MATCH (a:Facility {id: 'FAC-DELTA-MAA-04'}), (b:Location {id: 'LOC-MAA'}) MERGE (a)-[:LOCATED_IN]->(b);
+
+MERGE (batchG:Batch {id: 'BT-2026-0815-C77'})
+SET batchG.manufacturedOn = date('2026-08-15'), batchG.expiresOn = date('2028-08-14'),
+    batchG.status = 'RECALLED', batchG.quantity = 1500, batchG.provenanceConfidence = 38;
+MERGE (batchH:Batch {id: 'BT-2026-0814-N45'})
+SET batchH.manufacturedOn = date('2026-08-14'), batchH.expiresOn = date('2028-08-13'),
+    batchH.status = 'ON_HOLD', batchH.quantity = 2000, batchH.provenanceConfidence = 51;
+MATCH (a:Organization {id: 'ORG-ASTERIA'}), (b:Batch {id: 'BT-2026-0815-C77'}) MERGE (a)-[:PRODUCES]->(b);
+MATCH (a:Organization {id: 'ORG-ASTERIA'}), (b:Batch {id: 'BT-2026-0814-N45'}) MERGE (a)-[:PRODUCES]->(b);
+MATCH (a:Batch {id: 'BT-2026-0815-C77'}), (b:Drug {id: 'DRUG-CARDIOVEX-20'}) MERGE (a)-[:INSTANCE_OF]->(b);
+MATCH (a:Batch {id: 'BT-2026-0814-N45'}), (b:Drug {id: 'DRUG-NEUROCALM-10'}) MERGE (a)-[:INSTANCE_OF]->(b);
+
+MERGE (g1:Shipment {id: 'SHP-C77-01'})
+SET g1.sequence = 1, g1.departedAt = datetime('2026-08-16T08:00:00+05:30'),
+    g1.arrivedAt = datetime('2026-08-17T09:35:00+05:30'), g1.status = 'INTERCEPTED';
+MATCH (a:Batch {id: 'BT-2026-0815-C77'}), (b:Shipment {id: 'SHP-C77-01'}) MERGE (a)-[:SHIPPED_VIA]->(b);
+MATCH (a:Shipment {id: 'SHP-C77-01'}), (b:Facility {id: 'FAC-ASTERIA-01'}) MERGE (a)-[:FROM]->(b);
+MATCH (a:Shipment {id: 'SHP-C77-01'}), (b:Facility {id: 'FAC-DELTA-MAA-04'}) MERGE (a)-[:TO]->(b);
+
+MERGE (h1:Shipment {id: 'SHP-N45-01'})
+SET h1.sequence = 1, h1.departedAt = datetime('2026-08-15T09:20:00+05:30'),
+    h1.arrivedAt = datetime('2026-08-16T10:10:00+05:30'), h1.status = 'DELIVERED';
+MATCH (a:Batch {id: 'BT-2026-0814-N45'}), (b:Shipment {id: 'SHP-N45-01'}) MERGE (a)-[:SHIPPED_VIA]->(b);
+MATCH (a:Shipment {id: 'SHP-N45-01'}), (b:Facility {id: 'FAC-ASTERIA-01'}) MERGE (a)-[:FROM]->(b);
+MATCH (a:Shipment {id: 'SHP-N45-01'}), (b:Facility {id: 'FAC-DELTA-MAA-04'}) MERGE (a)-[:TO]->(b);
+
+MERGE (counterfeitIncident:RiskEvent {id: 'INC-318'})
+SET counterfeitIncident.type = 'SUSPECTED_COUNTERFEIT', counterfeitIncident.severity = 'CRITICAL',
+    counterfeitIncident.status = 'OPEN', counterfeitIncident.reportedOn = date('2026-08-17'),
+    counterfeitIncident.summary = 'Serial-number duplication and inconsistent holograms detected during market surveillance';
+MATCH (a:Facility {id: 'FAC-DELTA-MAA-04'}), (b:RiskEvent {id: 'INC-318'}) MERGE (a)-[:FLAGGED_FOR]->(b);
+MATCH (a:Batch {id: 'BT-2026-0815-C77'}), (b:RiskEvent {id: 'INC-318'}) MERGE (a)-[:ASSOCIATED_WITH]->(b);

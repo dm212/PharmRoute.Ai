@@ -53,7 +53,7 @@ graph LR
     Facility -->|FLAGGED_FOR| RiskEvent
 ```
 
-The seed dataset contains 30 nodes and 55 relationships, including four medicine batches, six shipment links, inspections, and shared-risk exposure paths.
+The deterministic seed dataset includes eight medicine batches and multiple shipment, inspection, cold-chain, tampering, and suspected-counterfeit relationship paths.
 
 ## Repository layout
 
@@ -128,6 +128,13 @@ Use batch `BT-2026-0812-A17` for the primary demonstration:
 2. Follow its three-leg journey through the supply chain.
 3. Inspect its recorded inspection and two graph-derived risk exposures.
 4. Explain how shared facilities and incidents connect this batch to related batches.
+
+Additional presentation scenarios:
+
+- `BT-2026-0814-I31` — quarantined Insulivex batch with a failed inspection and cold-chain breach.
+- `BT-2026-0813-I08` — delivered Insulivex batch indirectly exposed through the same cold-storage facility.
+- `BT-2026-0815-C77` — recalled Cardiovex batch linked to a suspected-counterfeit wholesaler.
+- `BT-2026-0814-N45` — NeuroCalm batch placed on hold through the same counterfeit-risk connection.
 
 ## Delivery phases
 
