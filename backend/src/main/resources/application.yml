@@ -1,0 +1,36 @@
+spring:
+  config:
+    import: optional:file:.env[.properties],optional:file:cognodb.env[.properties]
+  application:
+    name: PharmaTrace API
+  lifecycle:
+    timeout-per-shutdown-phase: 20s
+
+server:
+  port: ${PORT:8080}
+  shutdown: graceful
+  compression:
+    enabled: true
+  error:
+    include-message: never
+    include-stacktrace: never
+
+management:
+  endpoint:
+    health:
+      show-details: never
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+pharmatrace:
+  database:
+    uri: ${COGNODB_URI:bolt://localhost:7687}
+    username: ${COGNODB_USERNAME:cognodb}
+    password: ${COGNODB_PASSWORD:}
+  cors:
+    allowed-origins: ${APP_CORS_ALLOWED_ORIGINS:http://localhost:3000}
+  seed:
+    enabled: ${PHARMATRACE_SEED_ENABLED:false}
+    scripts-directory: ${PHARMATRACE_SEED_SCRIPTS_DIRECTORY:../scripts}

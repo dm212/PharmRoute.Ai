@@ -1,0 +1,6 @@
+target
+.env
+*.env
+cognodb.env*
+.idea
+*.iml
