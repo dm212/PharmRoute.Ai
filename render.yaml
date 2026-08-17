@@ -13,6 +13,6 @@ services:
       - key: COGNODB_PASSWORD
         sync: false
       - key: APP_CORS_ALLOWED_ORIGINS
-        sync: false
+        value: https://pharmatrace-investigator.dmyashwanth-class.chatgpt.site
       - key: PHARMATRACE_SEED_ENABLED
         value: "false"
