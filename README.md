@@ -4,6 +4,14 @@ PharmaTrace is an explainable pharmaceutical supply-chain investigation applicat
 
 This repository is being built for the Wexa AI graph database take-home assessment.
 
+## Live demo
+
+- **Application:** https://pharmatrace-investigator.dmyashwanth-class.chatgpt.site
+- **API health:** https://pharmatrace-api-vev3.onrender.com/actuator/health
+- **Source:** https://github.com/dm212/PharmaTrace
+
+The API runs on Render's free tier and can take up to a minute to wake after inactivity. The frontend is public and requires no sign-in.
+
 ## Current scope
 
 The assessment version deliberately focuses on three complete workflows:
@@ -128,5 +136,6 @@ Use batch `BT-2026-0812-A17` for the primary demonstration:
 - [x] Implement the Spring Boot API and error handling
 - [x] Implement the investigation UI and UX states
 - [x] Add tests, CI, and production configuration
-- [ ] Deploy, document, capture screenshots, and record the walkthrough (in progress)
+- [x] Deploy, document, and capture production screenshots
+- [ ] Record the walkthrough using `docs/RECORDING_GUIDE.md`
 - [ ] Run the final assessment compliance audit
