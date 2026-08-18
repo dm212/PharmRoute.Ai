@@ -2,8 +2,6 @@
 
 PharmRoute.Ai is an explainable pharmaceutical supply-chain investigation application backed by CognoDB. It helps a non-technical investigator trace a medicine batch, inspect every hand-off, and discover other batches indirectly exposed to a risky facility or counterfeit incident.
 
-This repository is being built for the Wexa AI graph database take-home assessment.
-
 ## Live demo
 
 - **Application:** https://pharmatrace-web.onrender.com
