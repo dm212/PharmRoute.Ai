@@ -165,30 +165,6 @@ GitHub Actions runs both gates for every pull request and every push to `main`. 
 
 CognoDB connection details are read from environment variables. Real credentials must never be committed. Copy the relevant `.env.example` file locally and provide values only in your development or hosting environment.
 
-## Production deployment
-
-The Spring Boot API includes a Dockerfile and a Render Blueprint (`render.yaml`). Create a Render Blueprint from this repository, then provide `COGNODB_URI`, `COGNODB_PASSWORD`, and the deployed frontend origin as `APP_CORS_ALLOWED_ORIGINS`. The health check is available at `/actuator/health`.
-
-The web application is built and deployed as a Node service on Render. Its production API origin is supplied with `NEXT_PUBLIC_API_BASE_URL`; no CognoDB credentials are sent to the browser.
-
-## Demo walkthrough
-
-A short silent screen recording is included at [`docs/demo/PharmRoute-AI-screen-demo.mp4`](docs/demo/PharmRoute-AI-screen-demo.mp4). The optional narration outline in [`docs/RECORDING_GUIDE.md`](docs/RECORDING_GUIDE.md) can be used during a follow-up presentation.
-
-Use batch `BT-2026-0812-A17` for the primary demonstration:
-
-1. Search for the batch and review its risk status.
-2. Follow its three-leg journey through the supply chain.
-3. Inspect its recorded inspection and two graph-derived risk exposures.
-4. Explain how shared facilities and incidents connect this batch to related batches.
-
-Additional presentation scenarios:
-
-- `BT-2026-0814-I31` — quarantined Insulivex batch with a failed inspection and cold-chain breach.
-- `BT-2026-0813-I08` — delivered Insulivex batch indirectly exposed through the same cold-storage facility.
-- `BT-2026-0815-C77` — recalled Cardiovex batch linked to a suspected-counterfeit wholesaler.
-- `BT-2026-0814-N45` — NeuroCalm batch placed on hold through the same counterfeit-risk connection.
-
 ## Delivery phases
 
 - [x] Define the use case and architecture
