@@ -6,11 +6,12 @@ This repository is being built for the Wexa AI graph database take-home assessme
 
 ## Live demo
 
-- **Application:** https://pharmroute-ai-web.onrender.com
-- **API health:** https://pharmroute-ai-api-vev3.onrender.com/actuator/health
+- **Application:** https://pharmatrace-web.onrender.com
+- **API health:** https://pharmatrace-api-vev3.onrender.com/actuator/health
 - **Source:** https://github.com/dm212/PharmRoute.Ai
 
 The frontend and API run as separate Render services on the free tier and can take up to a minute to wake after inactivity. The application is public and requires no sign-in.
+Render retains the services' original hostnames after a service rename; the product and repository are branded as PharmRoute.Ai.
 
 ## Current scope
 

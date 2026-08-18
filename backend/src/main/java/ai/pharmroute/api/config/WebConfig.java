@@ -15,7 +15,7 @@ public class WebConfig implements WebMvcConfigurer {
 
     public WebConfig(@Value("${pharmroute-ai.cors.allowed-origins}") String allowedOrigins) {
         this.allowedOrigins = Stream.concat(
-                Stream.of("http://localhost:3000", "https://pharmroute-ai-web.onrender.com"),
+                Stream.of("http://localhost:3000", "https://pharmatrace-web.onrender.com"),
                 Arrays.stream(allowedOrigins.split(",")))
                 .map(String::trim)
                 .filter(value -> !value.isBlank())
