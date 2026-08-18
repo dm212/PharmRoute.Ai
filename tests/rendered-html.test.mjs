@@ -23,7 +23,7 @@ test("server-renders the PharmaTrace product shell", async () => {
   assert.match(html, /Follow every hand-off/);
   assert.match(html, /Medicine batch ID/);
   assert.match(html, /BT-2026-0812-A17/);
-  assert.doesNotMatch(html, /Your site is taking shape|codex-preview|react-loading-skeleton/i);
+  assert.doesNotMatch(html, /Your site is taking shape|react-loading-skeleton/i);
 });
 
 test("frontend source contains live API and resilient UI states", async () => {

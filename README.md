@@ -6,11 +6,11 @@ This repository is being built for the Wexa AI graph database take-home assessme
 
 ## Live demo
 
-- **Application:** https://pharmatrace-investigator.dmyashwanth-class.chatgpt.site
+- **Application:** https://pharmatrace-web.onrender.com
 - **API health:** https://pharmatrace-api-vev3.onrender.com/actuator/health
 - **Source:** https://github.com/dm212/PharmaTrace
 
-The API runs on Render's free tier and can take up to a minute to wake after inactivity. The frontend is public and requires no sign-in.
+The frontend and API run as separate Render services on the free tier and can take up to a minute to wake after inactivity. The application is public and requires no sign-in.
 
 ## Current scope
 
@@ -118,7 +118,7 @@ CognoDB connection details are read from environment variables. Real credentials
 
 The Spring Boot API includes a Dockerfile and a Render Blueprint (`render.yaml`). Create a Render Blueprint from this repository, then provide `COGNODB_URI`, `COGNODB_PASSWORD`, and the deployed frontend origin as `APP_CORS_ALLOWED_ORIGINS`. The health check is available at `/actuator/health`.
 
-The web application is packaged and deployed through OpenAI Sites. Its production API origin is supplied with `NEXT_PUBLIC_API_BASE_URL`; no CognoDB credentials are sent to the browser.
+The web application is built and deployed as a Node service on Render. Its production API origin is supplied with `NEXT_PUBLIC_API_BASE_URL`; no CognoDB credentials are sent to the browser.
 
 ## Demo walkthrough
 
