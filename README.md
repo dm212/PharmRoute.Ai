@@ -51,10 +51,34 @@ graph LR
     Facility -->|LOCATED_IN| Location
     Batch -->|HAS_INSPECTION| Inspection
     Inspection -->|PERFORMED_BY| Authority
+    Inspection -->|AT_FACILITY| Facility
     Facility -->|FLAGGED_FOR| RiskEvent
 ```
 
 The deterministic seed dataset includes eight medicine batches and multiple shipment, inspection, cold-chain, tampering, and suspected-counterfeit relationship paths.
+
+Representative node properties include:
+
+| Node | Useful properties |
+| --- | --- |
+| `Batch` | `id`, `status`, `quantity`, `manufacturedOn`, `expiresOn`, `provenanceConfidence` |
+| `Shipment` | `id`, `sequence`, `status`, `departedAt`, `arrivedAt` |
+| `Facility` | `id`, `name`, `type`, `riskLevel` |
+| `Drug` | `id`, `name`, `strength`, `form`, `packSize` |
+| `Inspection` | `id`, `result`, `performedAt`, `notes` |
+| `RiskEvent` | `id`, `type`, `severity`, `status`, `reportedOn`, `summary` |
+
+Together, these labels, properties, and typed relationships allow the API to return both an investigation result and the relationship path that explains it.
+
+## Application screenshots
+
+### Multi-hop batch investigation
+
+![PharmRoute.Ai investigation showing the batch journey and graph-derived risk evidence](docs/screenshots/pharmroute-investigation.png)
+
+### High-severity cold-chain exposure
+
+![PharmRoute.Ai cold-chain investigation showing a failed route and related batch exposure](docs/screenshots/pharmroute-cold-chain-risk.png)
 
 ## Repository layout
 
@@ -73,6 +97,20 @@ The deterministic seed dataset includes eight medicine batches and multiple ship
 - Node.js 22+
 - Java 17+
 - A CognoDB Cloud c0 instance
+
+## Create and configure CognoDB
+
+1. Sign in to CognoDB Cloud and create a free `c0` database instance.
+2. Wait until the instance is ready, then copy its Bolt TLS URI, username, and password from the connection details. The URI normally uses the `bolt+s://` scheme.
+3. Create the local backend environment file:
+
+   ```bash
+   cp backend/.env.example backend/cognodb.env
+   ```
+
+4. Replace the placeholder values in `backend/cognodb.env` with your instance details. Do not commit this file.
+5. For the first backend start only, set `PHARMROUTE_AI_SEED_ENABLED=true`. The included loader runs `scripts/constraints.cypher` followed by `scripts/seed.cypher` against CognoDB.
+6. After the log reports `PharmRoute.Ai seed data loaded successfully`, stop the backend and set `PHARMROUTE_AI_SEED_ENABLED=false`. The seed is deterministic, but disabling the loader avoids unnecessary writes on later starts.
 
 ## Local development
 
@@ -93,6 +131,17 @@ npm run dev
 ```
 
 Open `http://localhost:3000` and investigate the seeded batch `BT-2026-0812-A17`.
+
+## Main graph queries
+
+All application queries use named parameters through the official Neo4j Java driver. Batch IDs are passed as `$batchId`; user input is never concatenated into Cypher.
+
+1. **Batch overview** — connects the selected `Batch` to its `Drug` and producing `Organization`.
+2. **Multi-hop provenance traversal** — follows `Batch -> Shipment -> Facility`, including operators and locations, and orders every shipment leg into a readable journey.
+3. **Indirect risk exposure** — traverses from the selected batch through shipments and a flagged facility to a `RiskEvent`, then discovers other batches that share the same facility. This neighbour-based evidence query would require repeated joins and additional path logic in a relational implementation.
+4. **Inspection evidence** — connects a batch to its inspection, performing authority, and facility.
+
+The complete parameterized Cypher and a purpose statement for each query are documented in [`docs/QUERIES.md`](docs/QUERIES.md).
 
 ## Quality checks
 
@@ -123,6 +172,8 @@ The web application is built and deployed as a Node service on Render. Its produ
 
 ## Demo walkthrough
 
+Record a short 4–5 minute demonstration using [`docs/RECORDING_GUIDE.md`](docs/RECORDING_GUIDE.md). Before submitting, upload the recording as an unlisted video or shareable cloud file and include its URL in the submission email.
+
 Use batch `BT-2026-0812-A17` for the primary demonstration:
 
 1. Search for the batch and review its risk status.
@@ -145,5 +196,5 @@ Additional presentation scenarios:
 - [x] Implement the investigation UI and UX states
 - [x] Add tests, CI, and production configuration
 - [x] Deploy, document, and capture production screenshots
-- [ ] Record the walkthrough using `docs/RECORDING_GUIDE.md`
-- [ ] Run the final assessment compliance audit
+- [ ] Record the walkthrough using `docs/RECORDING_GUIDE.md` and include its share link in the submission email
+- [x] Run the final assessment compliance audit
