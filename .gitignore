@@ -32,6 +32,7 @@ yarn-error.log*
 .env*
 *.env
 cognodb.env*
+!**/.env.example
 
 # vercel
 .vercel

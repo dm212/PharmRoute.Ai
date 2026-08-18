@@ -1,13 +1,13 @@
-package com.pharmatrace.api;
+package ai.pharmroute.api;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class PharmaTraceApiApplication {
+public class PharmRouteAiApiApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(PharmaTraceApiApplication.class, args);
+		SpringApplication.run(PharmRouteAiApiApplication.class, args);
 	}
 
 }

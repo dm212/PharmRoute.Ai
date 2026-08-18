@@ -1,4 +1,4 @@
-// Deterministic demonstration dataset for PharmaTrace.
+// Deterministic demonstration dataset for PharmRoute.Ai.
 // The dataset is fictional but reflects a realistic pharmaceutical supply network.
 
 MERGE (hyderabad:Location {id: 'LOC-HYD'})

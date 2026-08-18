@@ -1,4 +1,4 @@
-package com.pharmatrace.api.batch;
+package ai.pharmroute.api.batch;
 
 import static org.neo4j.driver.Values.parameters;
 
@@ -13,11 +13,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
-import com.pharmatrace.api.batch.BatchInvestigation.BatchOverview;
-import com.pharmatrace.api.batch.BatchInvestigation.FacilityStop;
-import com.pharmatrace.api.batch.BatchInvestigation.InspectionEvidence;
-import com.pharmatrace.api.batch.BatchInvestigation.JourneyLeg;
-import com.pharmatrace.api.batch.BatchInvestigation.RiskExposure;
+import ai.pharmroute.api.batch.BatchInvestigation.BatchOverview;
+import ai.pharmroute.api.batch.BatchInvestigation.FacilityStop;
+import ai.pharmroute.api.batch.BatchInvestigation.InspectionEvidence;
+import ai.pharmroute.api.batch.BatchInvestigation.JourneyLeg;
+import ai.pharmroute.api.batch.BatchInvestigation.RiskExposure;
 
 @Repository
 public class BatchRepository {

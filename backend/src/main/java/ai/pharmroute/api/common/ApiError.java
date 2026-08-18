@@ -1,4 +1,4 @@
-package com.pharmatrace.api.common;
+package ai.pharmroute.api.common;
 
 import java.time.Instant;
 

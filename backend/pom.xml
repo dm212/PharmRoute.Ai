@@ -8,10 +8,10 @@
 		<version>4.1.0</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.pharmatrace</groupId>
-	<artifactId>pharmatrace-api</artifactId>
+	<groupId>ai.pharmroute</groupId>
+	<artifactId>pharmroute-ai-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>PharmaTrace API</name>
+	<name>PharmRoute.Ai API</name>
 	<description>Explainable pharmaceutical supply-chain investigation API</description>
 	<url/>
 	<licenses>

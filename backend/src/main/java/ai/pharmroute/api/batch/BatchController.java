@@ -1,4 +1,4 @@
-package com.pharmatrace.api.batch;
+package ai.pharmroute.api.batch;
 
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;

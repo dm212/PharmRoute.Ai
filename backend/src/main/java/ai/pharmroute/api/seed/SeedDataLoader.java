@@ -1,4 +1,4 @@
-package com.pharmatrace.api.seed;
+package ai.pharmroute.api.seed;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -22,8 +22,8 @@ public class SeedDataLoader implements ApplicationRunner {
 
     public SeedDataLoader(
             Driver driver,
-            @Value("${pharmatrace.seed.scripts-directory}") String scriptsDirectory,
-            @Value("${pharmatrace.seed.enabled:false}") boolean enabled) {
+            @Value("${pharmroute-ai.seed.scripts-directory}") String scriptsDirectory,
+            @Value("${pharmroute-ai.seed.enabled:false}") boolean enabled) {
         this.driver = driver;
         this.scriptsDirectory = Path.of(scriptsDirectory).toAbsolutePath().normalize();
         this.enabled = enabled;
@@ -31,7 +31,7 @@ public class SeedDataLoader implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws IOException {
-        System.out.println("PharmaTrace seed loader enabled: " + enabled);
+        System.out.println("PharmRoute.Ai seed loader enabled: " + enabled);
         if (!enabled) {
             return;
         }
@@ -39,7 +39,7 @@ public class SeedDataLoader implements ApplicationRunner {
             executeScript(session, scriptsDirectory.resolve("constraints.cypher"));
             executeScript(session, scriptsDirectory.resolve("seed.cypher"));
         }
-        System.out.println("PharmaTrace seed data loaded successfully.");
+        System.out.println("PharmRoute.Ai seed data loaded successfully.");
     }
 
     private void executeScript(Session session, Path scriptPath) throws IOException {

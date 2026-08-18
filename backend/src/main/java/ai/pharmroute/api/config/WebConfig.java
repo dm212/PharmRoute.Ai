@@ -1,4 +1,4 @@
-package com.pharmatrace.api.config;
+package ai.pharmroute.api.config;
 
 import java.util.Arrays;
 import java.util.stream.Stream;
@@ -13,9 +13,9 @@ public class WebConfig implements WebMvcConfigurer {
 
     private final String[] allowedOrigins;
 
-    public WebConfig(@Value("${pharmatrace.cors.allowed-origins}") String allowedOrigins) {
+    public WebConfig(@Value("${pharmroute-ai.cors.allowed-origins}") String allowedOrigins) {
         this.allowedOrigins = Stream.concat(
-                Stream.of("http://localhost:3000", "https://pharmatrace-web.onrender.com"),
+                Stream.of("http://localhost:3000", "https://pharmroute-ai-web.onrender.com"),
                 Arrays.stream(allowedOrigins.split(",")))
                 .map(String::trim)
                 .filter(value -> !value.isBlank())

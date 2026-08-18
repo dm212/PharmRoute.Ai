@@ -146,9 +146,9 @@ export default function Home() {
   return (
     <main>
       <header className="topbar">
-        <a className="brand" href="#top" aria-label="PharmaTrace home">
+        <a className="brand" href="#top" aria-label="PharmRoute.Ai home">
           <span className="brand-mark">P</span>
-          <span><strong>PharmaTrace</strong><small>Supply-chain intelligence</small></span>
+          <span><strong>PharmRoute.Ai</strong><small>Supply-chain intelligence</small></span>
         </a>
         <div className={`system-status ${connected ? "" : "offline"}`} aria-live="polite">
           <span className="status-dot" /> {connected ? "CognoDB connected" : "Checking graph"}

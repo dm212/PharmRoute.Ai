@@ -1,4 +1,4 @@
-// PharmaTrace uniqueness constraints and lookup indexes.
+// PharmRoute.Ai uniqueness constraints and lookup indexes.
 // Safe to run repeatedly against CognoDB.
 
 CREATE CONSTRAINT organization_id IF NOT EXISTS

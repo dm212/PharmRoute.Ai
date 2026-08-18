@@ -12,14 +12,14 @@ async function render() {
   );
 }
 
-test("server-renders the PharmaTrace product shell", async () => {
+test("server-renders the PharmRoute.Ai product shell", async () => {
   const response = await render();
   assert.equal(response.status, 200);
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
-  assert.match(html, /<title>PharmaTrace \| Explainable medicine provenance<\/title>/i);
-  assert.match(html, /PharmaTrace/);
+  assert.match(html, /<title>PharmRoute.Ai \| Explainable medicine provenance<\/title>/i);
+  assert.match(html, /PharmRoute.Ai/);
   assert.match(html, /Follow every hand-off/);
   assert.match(html, /Medicine batch ID/);
   assert.match(html, /BT-2026-0812-A17/);
@@ -40,7 +40,7 @@ test("frontend source contains live API and resilient UI states", async () => {
   assert.match(page, /Investigation unavailable/);
   assert.match(page, /No shipment events have been recorded/);
   assert.match(page, /No indirect exposure/);
-  assert.match(layout, /PharmaTrace \| Explainable medicine provenance/);
+  assert.match(layout, /PharmRoute.Ai \| Explainable medicine provenance/);
   assert.match(css, /prefers-reduced-motion/);
   assert.match(css, /error-state/);
   assert.doesNotMatch(packageJson, /react-loading-skeleton/);

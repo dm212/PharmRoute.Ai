@@ -2,7 +2,7 @@ spring:
   config:
     import: optional:file:.env[.properties],optional:file:cognodb.env[.properties]
   application:
-    name: PharmaTrace API
+    name: PharmRoute.Ai API
   lifecycle:
     timeout-per-shutdown-phase: 20s
 
@@ -24,7 +24,7 @@ management:
       exposure:
         include: health,info
 
-pharmatrace:
+pharmroute-ai:
   database:
     uri: ${COGNODB_URI:bolt://localhost:7687}
     username: ${COGNODB_USERNAME:cognodb}
@@ -32,5 +32,5 @@ pharmatrace:
   cors:
     allowed-origins: ${APP_CORS_ALLOWED_ORIGINS:http://localhost:3000}
   seed:
-    enabled: ${PHARMATRACE_SEED_ENABLED:false}
-    scripts-directory: ${PHARMATRACE_SEED_SCRIPTS_DIRECTORY:../scripts}
+    enabled: ${PHARMROUTE_AI_SEED_ENABLED:false}
+    scripts-directory: ${PHARMROUTE_AI_SEED_SCRIPTS_DIRECTORY:../scripts}

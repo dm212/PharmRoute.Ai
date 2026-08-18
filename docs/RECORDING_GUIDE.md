@@ -1,10 +1,10 @@
-# PharmaTrace walkthrough guide
+# PharmRoute.Ai walkthrough guide
 
 Target length: 4–5 minutes.
 
 ## 1. Problem and graph fit — 45 seconds
 
-Introduce PharmaTrace as an investigator-facing pharmaceutical supply-chain tool. Explain that batches, shipments, facilities, organizations, inspections, and incidents form a connected network. The useful question is not merely “what row contains this batch?” but “which route did it take, what risky facility did it touch, and which other batches share that exposure?”
+Introduce PharmRoute.Ai as an investigator-facing pharmaceutical supply-chain tool. Explain that batches, shipments, facilities, organizations, inspections, and incidents form a connected network. The useful question is not merely “what row contains this batch?” but “which route did it take, what risky facility did it touch, and which other batches share that exposure?”
 
 ## 2. Architecture — 30 seconds
 

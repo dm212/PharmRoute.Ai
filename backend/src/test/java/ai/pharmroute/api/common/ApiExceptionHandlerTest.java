@@ -1,4 +1,4 @@
-package com.pharmatrace.api.common;
+package ai.pharmroute.api.common;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 
-import com.pharmatrace.api.batch.BatchNotFoundException;
-import com.pharmatrace.api.batch.GraphUnavailableException;
+import ai.pharmroute.api.batch.BatchNotFoundException;
+import ai.pharmroute.api.batch.GraphUnavailableException;
 
 class ApiExceptionHandlerTest {
 

@@ -6,7 +6,7 @@ const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "PharmaTrace | Explainable medicine provenance",
+  title: "PharmRoute.Ai | Explainable medicine provenance",
   description: "Trace pharmaceutical batches and investigate indirect supply-chain risk with graph-powered evidence.",
   icons: { icon: "/favicon.svg", shortcut: "/favicon.svg" },
 };

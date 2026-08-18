@@ -1,10 +1,10 @@
-package com.pharmatrace.api;
+package ai.pharmroute.api;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class PharmaTraceApiApplicationTests {
+class PharmRouteAiApiApplicationTests {
 
 	@Test
 	void contextLoads() {

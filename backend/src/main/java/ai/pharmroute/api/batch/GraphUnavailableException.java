@@ -1,4 +1,4 @@
-package com.pharmatrace.api.batch;
+package ai.pharmroute.api.batch;
 
 public class GraphUnavailableException extends RuntimeException {
 

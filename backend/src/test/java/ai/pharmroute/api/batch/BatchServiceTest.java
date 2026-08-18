@@ -1,4 +1,4 @@
-package com.pharmatrace.api.batch;
+package ai.pharmroute.api.batch;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;

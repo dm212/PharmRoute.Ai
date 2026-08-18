@@ -1,4 +1,4 @@
-package com.pharmatrace.api.common;
+package ai.pharmroute.api.common;
 
 import java.time.Instant;
 
@@ -9,8 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import com.pharmatrace.api.batch.BatchNotFoundException;
-import com.pharmatrace.api.batch.GraphUnavailableException;
+import ai.pharmroute.api.batch.BatchNotFoundException;
+import ai.pharmroute.api.batch.GraphUnavailableException;
 
 @RestControllerAdvice
 public class ApiExceptionHandler {

@@ -1,4 +1,4 @@
-package com.pharmatrace.api.config;
+package ai.pharmroute.api.config;
 
 import java.util.concurrent.TimeUnit;
 

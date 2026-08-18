@@ -1,14 +1,14 @@
-# PharmaTrace
+# PharmRoute.Ai
 
-PharmaTrace is an explainable pharmaceutical supply-chain investigation application backed by CognoDB. It helps a non-technical investigator trace a medicine batch, inspect every hand-off, and discover other batches indirectly exposed to a risky facility or counterfeit incident.
+PharmRoute.Ai is an explainable pharmaceutical supply-chain investigation application backed by CognoDB. It helps a non-technical investigator trace a medicine batch, inspect every hand-off, and discover other batches indirectly exposed to a risky facility or counterfeit incident.
 
 This repository is being built for the Wexa AI graph database take-home assessment.
 
 ## Live demo
 
-- **Application:** https://pharmatrace-web.onrender.com
-- **API health:** https://pharmatrace-api-vev3.onrender.com/actuator/health
-- **Source:** https://github.com/dm212/PharmaTrace
+- **Application:** https://pharmroute-ai-web.onrender.com
+- **API health:** https://pharmroute-ai-api-vev3.onrender.com/actuator/health
+- **Source:** https://github.com/dm212/PharmRoute.Ai
 
 The frontend and API run as separate Render services on the free tier and can take up to a minute to wake after inactivity. The application is public and requires no sign-in.
 
