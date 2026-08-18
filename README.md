@@ -9,6 +9,7 @@ This repository is being built for the Wexa AI graph database take-home assessme
 - **Application:** https://pharmatrace-web.onrender.com
 - **API health:** https://pharmatrace-api-vev3.onrender.com/actuator/health
 - **Source:** https://github.com/dm212/PharmRoute.Ai
+- **Short screen recording:** [`docs/demo/PharmRoute-AI-screen-demo.mp4`](docs/demo/PharmRoute-AI-screen-demo.mp4)
 
 The frontend and API run as separate Render services on the free tier and can take up to a minute to wake after inactivity. The application is public and requires no sign-in.
 Render retains the services' original hostnames after a service rename; the product and repository are branded as PharmRoute.Ai.
@@ -172,7 +173,7 @@ The web application is built and deployed as a Node service on Render. Its produ
 
 ## Demo walkthrough
 
-Record a short 4–5 minute demonstration using [`docs/RECORDING_GUIDE.md`](docs/RECORDING_GUIDE.md). Before submitting, upload the recording as an unlisted video or shareable cloud file and include its URL in the submission email.
+A short silent screen recording is included at [`docs/demo/PharmRoute-AI-screen-demo.mp4`](docs/demo/PharmRoute-AI-screen-demo.mp4). The optional narration outline in [`docs/RECORDING_GUIDE.md`](docs/RECORDING_GUIDE.md) can be used during a follow-up presentation.
 
 Use batch `BT-2026-0812-A17` for the primary demonstration:
 
@@ -196,5 +197,5 @@ Additional presentation scenarios:
 - [x] Implement the investigation UI and UX states
 - [x] Add tests, CI, and production configuration
 - [x] Deploy, document, and capture production screenshots
-- [ ] Record the walkthrough using `docs/RECORDING_GUIDE.md` and include its share link in the submission email
+- [x] Include a short screen recording of the hosted application
 - [x] Run the final assessment compliance audit
