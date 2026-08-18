@@ -1,5 +1,17 @@
 services:
   - type: web
+    name: pharmatrace-web
+    runtime: node
+    plan: free
+    buildCommand: npm ci && npm run build
+    startCommand: npm run start
+    envVars:
+      - key: NODE_VERSION
+        value: 22.13.0
+      - key: NEXT_PUBLIC_API_BASE_URL
+        value: https://pharmatrace-api-vev3.onrender.com
+
+  - type: web
     name: pharmatrace-api
     runtime: docker
     rootDir: backend
@@ -13,6 +25,6 @@ services:
       - key: COGNODB_PASSWORD
         sync: false
       - key: APP_CORS_ALLOWED_ORIGINS
-        value: https://pharmatrace-investigator.dmyashwanth-class.chatgpt.site
+        value: https://pharmatrace-web.onrender.com
       - key: PHARMATRACE_SEED_ENABLED
         value: "false"
