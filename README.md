@@ -74,11 +74,11 @@ Together, these labels, properties, and typed relationships allow the API to ret
 
 ### Multi-hop batch investigation
 
-![PharmRoute.Ai investigation showing the batch journey and graph-derived risk evidence](docs/screenshots/pharmroute-investigation.png)
+<img src="docs/screenshots/pharmroute-investigation.jpg" width="960" alt="PharmRoute.Ai investigation showing the batch journey and graph-derived risk evidence">
 
 ### High-severity cold-chain exposure
 
-![PharmRoute.Ai cold-chain investigation showing a failed route and related batch exposure](docs/screenshots/pharmroute-cold-chain-risk.png)
+<img src="docs/screenshots/pharmroute-cold-chain-risk.jpg" width="960" alt="PharmRoute.Ai cold-chain investigation showing a failed route and related batch exposure">
 
 ## Repository layout
 
