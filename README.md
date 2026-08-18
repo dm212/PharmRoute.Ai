@@ -35,7 +35,7 @@ flowchart LR
     API -->|"Parameterized Cypher"| DB["CognoDB over Bolt TLS"]
 ```
 
-The backend is a modular Spring Boot application rather than multiple microservices. This keeps the take-home maintainable and deployable while preserving clear controller, service, and repository boundaries.
+The backend is a modular Spring Boot application rather than multiple microservices. This keeps the application maintainable and deployable while preserving clear controller, service, and repository boundaries.
 
 ## Graph model
 
