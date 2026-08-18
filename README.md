@@ -42,18 +42,26 @@ The backend is a modular Spring Boot application rather than multiple microservi
 ## Graph model
 
 ```mermaid
-graph LR
-    Manufacturer -->|PRODUCES| Batch
-    Batch -->|INSTANCE_OF| Drug
-    Batch -->|SHIPPED_VIA| Shipment
-    Shipment -->|FROM| Facility
-    Shipment -->|TO| Facility
-    Organization -->|OPERATES| Facility
-    Facility -->|LOCATED_IN| Location
-    Batch -->|HAS_INSPECTION| Inspection
-    Inspection -->|PERFORMED_BY| Authority
-    Inspection -->|AT_FACILITY| Facility
-    Facility -->|FLAGGED_FOR| RiskEvent
+flowchart LR
+    Organization["Organization"] -->|PRODUCES| Batch["Batch"]
+    Batch -->|INSTANCE_OF| Drug["Drug"]
+    Batch -->|SHIPPED_VIA| Shipment["Shipment"]
+    Shipment -->|FROM| Origin["Facility"]
+    Shipment -->|TO| Destination["Facility"]
+
+    Organization -->|OPERATES| Origin
+    Organization -->|OPERATES| Destination
+    Origin -->|LOCATED_IN| Location["Location"]
+    Destination -->|FLAGGED_FOR| RiskEvent["RiskEvent"]
+
+    Batch -->|HAS_INSPECTION| Inspection["Inspection"]
+    Inspection -->|PERFORMED_BY| Authority["Authority"]
+    Inspection -->|AT_FACILITY| Destination
+
+    classDef core fill:#dceee7,stroke:#2f6b5a,stroke-width:2px,color:#173d32
+    classDef evidence fill:#fff3df,stroke:#a96718,color:#57350f
+    class Batch,Shipment,Origin,Destination core
+    class Inspection,RiskEvent,Authority evidence
 ```
 
 The deterministic seed dataset includes eight medicine batches and multiple shipment, inspection, cold-chain, tampering, and suspected-counterfeit relationship paths.
@@ -165,13 +173,9 @@ GitHub Actions runs both gates for every pull request and every push to `main`. 
 
 CognoDB connection details are read from environment variables. Real credentials must never be committed. Copy the relevant `.env.example` file locally and provide values only in your development or hosting environment.
 
-## Delivery phases
+## Engineering decisions
 
-- [x] Define the use case and architecture
-- [x] Implement graph constraints, seed data, and core Cypher queries
-- [x] Implement the Spring Boot API and error handling
-- [x] Implement the investigation UI and UX states
-- [x] Add tests, CI, and production configuration
-- [x] Deploy, document, and capture production screenshots
-- [x] Include a short screen recording of the hosted application
-- [x] Run the final assessment compliance audit
+- **Spring Boot behind a separate web client:** the Java API keeps CognoDB credentials out of the browser and uses the official Neo4j driver for explicit, parameterized Cypher. It also aligns with the project's emphasis on clear controller, service, and repository boundaries.
+- **Modular monolith over microservices:** one backend deployment is easier to understand, test, and operate for this scope, while still separating configuration, business logic, graph access, and error handling.
+- **CognoDB for explainable investigation paths:** batches, shipments, facilities, inspections, and incidents are modeled as first-class relationships. This makes multi-hop provenance and shared-facility exposure direct traversals rather than chains of relational joins.
+- **Deterministic seed scenarios:** repeatable pharmaceutical routes, inspections, and incidents make local setup predictable and ensure the same evidence paths can be demonstrated and tested on every environment.
