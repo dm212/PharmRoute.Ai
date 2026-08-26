@@ -135,6 +135,16 @@ button { cursor: pointer; }
 .related-list div { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 9px 10px; background: #f4f7f5; border-radius: 8px; }
 .related-list span { font: 650 10px var(--font-geist-mono); }
 .related-list small { color: var(--muted); font-size: 10px; }
+.site-footer {
+  padding: 24px clamp(24px, 5vw, 72px);
+  color: var(--muted);
+  background: var(--white);
+  border-top: 1px solid var(--line);
+  font-size: 11px;
+  line-height: 1.6;
+  text-align: center;
+}
+.site-footer strong { color: var(--ink); }
 
 @media (max-width: 900px) {
   .hero { grid-template-columns: 1fr; align-items: start; }

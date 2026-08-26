@@ -234,6 +234,13 @@ export default function Home() {
           </>
         )}
       </section>
+
+      <footer className="site-footer">
+        <strong>Demonstration data only.</strong> All organizations, medicines, facilities,
+        incidents, identifiers, and operational records shown here are synthetic and do not
+        represent real supply-chain or patient data. Any resemblance to an actual entity or
+        product is coincidental.
+      </footer>
     </main>
   );
 }

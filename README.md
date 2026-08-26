@@ -64,6 +64,10 @@ flowchart LR
 
 The deterministic seed dataset includes eight medicine batches and multiple shipment, inspection, cold-chain, tampering, and suspected-counterfeit relationship paths.
 
+### Demonstration data notice
+
+All organizations, medicines, facilities, incidents, identifiers, and operational records in this project are synthetic and provided solely for illustrative purposes. They do not represent real supply-chain or patient data. Any resemblance to an actual entity or product is coincidental.
+
 Representative node properties include:
 
 | Node | Useful properties |
@@ -183,3 +187,5 @@ CognoDB connection details are read from environment variables. Real credentials
 Copyright © 2026 Yashwanth D M. All rights reserved.
 
 This repository is provided for portfolio and evaluation purposes. No permission is granted to reproduce, redistribute, or submit this work as another person's own work.
+
+Third-party software remains subject to its respective licence. See [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) for the direct dependencies used by this project.

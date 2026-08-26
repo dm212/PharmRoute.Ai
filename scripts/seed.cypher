@@ -14,47 +14,47 @@ MERGE (chennai:Location {id: 'LOC-MAA'})
 SET chennai.city = 'Chennai', chennai.state = 'Tamil Nadu', chennai.country = 'India';
 
 MERGE (asteria:Organization {id: 'ORG-ASTERIA'})
-SET asteria.name = 'Asteria Pharma Labs', asteria.type = 'MANUFACTURER',
+SET asteria.name = 'Demo Manufacturer MFG-01', asteria.type = 'MANUFACTURER',
     asteria.licenseNumber = 'MFG-TG-20491', asteria.verified = true;
 
 MERGE (northstar:Organization {id: 'ORG-NORTHSTAR'})
-SET northstar.name = 'NorthStar Medical Logistics', northstar.type = 'LOGISTICS',
+SET northstar.name = 'Demo Logistics Operator LOG-01', northstar.type = 'LOGISTICS',
     northstar.licenseNumber = 'LOG-KA-77210', northstar.verified = true;
 
 MERGE (mediroute:Organization {id: 'ORG-MEDIROUTE'})
-SET mediroute.name = 'MediRoute Distribution', mediroute.type = 'DISTRIBUTOR',
+SET mediroute.name = 'Demo Distributor DST-01', mediroute.type = 'DISTRIBUTOR',
     mediroute.licenseNumber = 'DST-KA-11804', mediroute.verified = true;
 
 MERGE (carewell:Organization {id: 'ORG-CAREWELL'})
-SET carewell.name = 'Carewell Pharmacy Group', carewell.type = 'PHARMACY',
+SET carewell.name = 'Demo Pharmacy Network RX-01', carewell.type = 'PHARMACY',
     carewell.licenseNumber = 'PHA-KA-39007', carewell.verified = true;
 
 MERGE (southern:Organization {id: 'ORG-SOUTHERN'})
-SET southern.name = 'Southern Cross Distribution', southern.type = 'DISTRIBUTOR',
+SET southern.name = 'Demo Distributor DST-02', southern.type = 'DISTRIBUTOR',
     southern.licenseNumber = 'DST-TN-90821', southern.verified = true;
 
 MERGE (plant:Facility {id: 'FAC-ASTERIA-01'})
-SET plant.name = 'Asteria Formulations Plant 1', plant.type = 'MANUFACTURING_PLANT',
+SET plant.name = 'Demo Manufacturing Plant 01', plant.type = 'MANUFACTURING_PLANT',
     plant.riskLevel = 'LOW', plant.verified = true;
 
 MERGE (warehouse:Facility {id: 'FAC-NORTHSTAR-BLR'})
-SET warehouse.name = 'NorthStar Regional Warehouse', warehouse.type = 'WAREHOUSE',
+SET warehouse.name = 'Demo Regional Warehouse 01', warehouse.type = 'WAREHOUSE',
     warehouse.riskLevel = 'LOW', warehouse.verified = true;
 
 MERGE (hub07:Facility {id: 'FAC-MEDIROUTE-07'})
-SET hub07.name = 'MediRoute Hub 07', hub07.type = 'DISTRIBUTION_HUB',
+SET hub07.name = 'Demo Distribution Hub 07', hub07.type = 'DISTRIBUTION_HUB',
     hub07.riskLevel = 'MEDIUM', hub07.verified = true;
 
 MERGE (pharmacy:Facility {id: 'FAC-CAREWELL-IND'})
-SET pharmacy.name = 'Carewell Pharmacy - Indiranagar', pharmacy.type = 'PHARMACY',
+SET pharmacy.name = 'Demo Community Pharmacy 01', pharmacy.type = 'PHARMACY',
     pharmacy.riskLevel = 'LOW', pharmacy.verified = true;
 
 MERGE (mysuruHub:Facility {id: 'FAC-NORTHSTAR-MYS'})
-SET mysuruHub.name = 'NorthStar Mysuru Hub', mysuruHub.type = 'DISTRIBUTION_HUB',
+SET mysuruHub.name = 'Demo Mysuru Distribution Hub', mysuruHub.type = 'DISTRIBUTION_HUB',
     mysuruHub.riskLevel = 'LOW', mysuruHub.verified = true;
 
 MERGE (southernHub:Facility {id: 'FAC-SOUTHERN-MAA'})
-SET southernHub.name = 'Southern Cross Chennai Hub', southernHub.type = 'DISTRIBUTION_HUB',
+SET southernHub.name = 'Demo Chennai Distribution Hub', southernHub.type = 'DISTRIBUTION_HUB',
     southernHub.riskLevel = 'LOW', southernHub.verified = true;
 
 MATCH (a:Organization {id: 'ORG-ASTERIA'}), (b:Facility {id: 'FAC-ASTERIA-01'}) MERGE (a)-[:OPERATES]->(b);
@@ -72,11 +72,11 @@ MATCH (a:Facility {id: 'FAC-NORTHSTAR-MYS'}), (b:Location {id: 'LOC-MYS'}) MERGE
 MATCH (a:Facility {id: 'FAC-SOUTHERN-MAA'}), (b:Location {id: 'LOC-MAA'}) MERGE (a)-[:LOCATED_IN]->(b);
 
 MERGE (cardiovex:Drug {id: 'DRUG-CARDIOVEX-20'})
-SET cardiovex.name = 'Cardiovex', cardiovex.strength = '20 mg',
+SET cardiovex.name = 'Demo Medicine DM-20', cardiovex.strength = '20 mg',
     cardiovex.form = 'Tablet', cardiovex.packSize = '10-tablet blister pack';
 
 MERGE (neurocalm:Drug {id: 'DRUG-NEUROCALM-10'})
-SET neurocalm.name = 'NeuroCalm', neurocalm.strength = '10 mg',
+SET neurocalm.name = 'Demo Medicine DM-10', neurocalm.strength = '10 mg',
     neurocalm.form = 'Tablet', neurocalm.packSize = '15-tablet blister pack';
 
 MERGE (batchA:Batch {id: 'BT-2026-0812-A17'})
@@ -167,13 +167,13 @@ MATCH (a:Batch {id: 'BT-2026-0809-C04'}), (b:RiskEvent {id: 'INC-104'}) MERGE (a
 
 // Presentation scenario 2: temperature-sensitive medicine exposed through a cold-chain breach.
 MERGE (coldHub:Facility {id: 'FAC-NORTHSTAR-COLD-02'})
-SET coldHub.name = 'NorthStar Cold Storage 02', coldHub.type = 'COLD_STORAGE',
+SET coldHub.name = 'Demo Cold Storage 02', coldHub.type = 'COLD_STORAGE',
     coldHub.riskLevel = 'HIGH', coldHub.verified = true;
 MATCH (a:Organization {id: 'ORG-NORTHSTAR'}), (b:Facility {id: 'FAC-NORTHSTAR-COLD-02'}) MERGE (a)-[:OPERATES]->(b);
 MATCH (a:Facility {id: 'FAC-NORTHSTAR-COLD-02'}), (b:Location {id: 'LOC-MYS'}) MERGE (a)-[:LOCATED_IN]->(b);
 
 MERGE (insulivex:Drug {id: 'DRUG-INSULIVEX-100'})
-SET insulivex.name = 'Insulivex', insulivex.strength = '100 IU/mL',
+SET insulivex.name = 'Demo Biologic DB-100', insulivex.strength = '100 IU/mL',
     insulivex.form = 'Injection', insulivex.packSize = '10 mL vial';
 
 MERGE (batchE:Batch {id: 'BT-2026-0814-I31'})
@@ -217,10 +217,10 @@ MATCH (a:Inspection {id: 'INSP-I31-02'}), (b:Facility {id: 'FAC-NORTHSTAR-COLD-0
 
 // Presentation scenario 3: two batches connected through a suspected counterfeit wholesaler.
 MERGE (delta:Organization {id: 'ORG-DELTA-WHOLESALE'})
-SET delta.name = 'Delta LifeScience Wholesale', delta.type = 'WHOLESALER',
+SET delta.name = 'Demo Wholesaler WHL-01', delta.type = 'WHOLESALER',
     delta.licenseNumber = 'PENDING-VERIFY', delta.verified = false;
 MERGE (deltaHub:Facility {id: 'FAC-DELTA-MAA-04'})
-SET deltaHub.name = 'Delta Wholesale Depot 04', deltaHub.type = 'WHOLESALE_DEPOT',
+SET deltaHub.name = 'Demo Wholesale Depot 04', deltaHub.type = 'WHOLESALE_DEPOT',
     deltaHub.riskLevel = 'CRITICAL', deltaHub.verified = false;
 MATCH (a:Organization {id: 'ORG-DELTA-WHOLESALE'}), (b:Facility {id: 'FAC-DELTA-MAA-04'}) MERGE (a)-[:OPERATES]->(b);
 MATCH (a:Facility {id: 'FAC-DELTA-MAA-04'}), (b:Location {id: 'LOC-MAA'}) MERGE (a)-[:LOCATED_IN]->(b);
