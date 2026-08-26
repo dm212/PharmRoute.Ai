@@ -177,3 +177,9 @@ CognoDB connection details are read from environment variables. Real credentials
 - **Modular monolith over microservices:** one backend deployment is easier to understand, test, and operate for this scope, while still separating configuration, business logic, graph access, and error handling.
 - **CognoDB for explainable investigation paths:** batches, shipments, facilities, inspections, and incidents are modeled as first-class relationships. This makes multi-hop provenance and shared-facility exposure direct traversals rather than chains of relational joins.
 - **Deterministic seed scenarios:** repeatable pharmaceutical routes, inspections, and incidents make local setup predictable and ensure the same evidence paths can be demonstrated and tested on every environment.
+
+## Copyright
+
+Copyright © 2026 Yashwanth D M. All rights reserved.
+
+This repository is provided for portfolio and evaluation purposes. No permission is granted to reproduce, redistribute, or submit this work as another person's own work.
